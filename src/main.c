@@ -26,9 +26,10 @@ const  int  MAX_JS_READY_WAIT = 5000; // 5s
 static bool initial_request = true;
 static AppTimer *initial_jsready_timer;
 
+
 static void handle_tick(struct tm *tick_time, TimeUnits units_changed)
 {
-  if (units_changed & MINUTE_UNIT) {
+   if (units_changed & MINUTE_UNIT) {
     time_layer_update();
     
     if (!initial_request) {
@@ -117,8 +118,7 @@ static void init(void)
   
   // Subscribe to bluetooth
   bluetooth_connection_service_subscribe(&handle_bt);
-  
-  accel_tap_service_subscribe(&handle_tap);
+
 }
 
 static void deinit(void) 
@@ -127,7 +127,6 @@ static void deinit(void)
 
   tick_timer_service_unsubscribe();
   bluetooth_connection_service_unsubscribe();
-  accel_tap_service_unsubscribe();
 
   window_destroy(window);
 

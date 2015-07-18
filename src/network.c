@@ -8,8 +8,6 @@
 
 const  int MAX_RETRY = 2;
 static int retry_count = 0;
-static char locale_msg[200];  
-
 
 static void appmsg_in_received(DictionaryIterator *received, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "In received.");

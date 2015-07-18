@@ -5,7 +5,6 @@
 
 static Layer *weather_layer;
 TextLayer *location_layer;
-static bool temp_feels_like = false;
 
 
 // Buffer the day / night time switch around sunrise & sunset
@@ -27,14 +26,6 @@ static int  animation_step = 0;
 static char time_h1[] = "00XX";
 static char time_h2[] = "00XX";
 static char last_update_text[] = "00:00";
-
-
-void handle_tap(AccelAxisType axis, int32_t direction) {
-
-  temp_feels_like = !temp_feels_like;
-  //vibes_short_pulse();
-}
-
 
 static void weather_animate_update(Layer *me, GContext *ctx) 
 {
@@ -251,8 +242,8 @@ void weather_layer_set_temperature(int16_t t, bool is_stale)
 {
   WeatherLayerData *wld = layer_get_data(weather_layer);
 
-  snprintf(wld->primary_temp_str, sizeof(wld->primary_temp_str), 
-    "%i%s", t, is_stale ? " " : "°");
+  snprintf(wld->primary_temp_str, sizeof(wld->primary_temp_str),
+  "%i%s",t, is_stale ? " " : "°");
 
   text_layer_set_text(wld->primary_temp_layer, wld->primary_temp_str);
 }
@@ -313,7 +304,6 @@ void weather_layer_update(WeatherData *weather_data)
 
     // Show the temperature as 'stale' if it has not been updated in WEATHER_STALE_TIMEOUT
     weather_layer_set_temperature(weather_data->temperature, stale);
-    //weather_layer_set_temperature(99, stale);
 
 
     // Day/night check
