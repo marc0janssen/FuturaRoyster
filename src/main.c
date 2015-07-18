@@ -114,6 +114,9 @@ static void init(void)
 
   // And then every minute
   tick_timer_service_subscribe(MINUTE_UNIT, handle_tick);
+  
+  // Subscribe to bluetooth
+  bluetooth_connection_service_subscribe(&handle_bt);
 }
 
 static void deinit(void) 
@@ -121,6 +124,7 @@ static void deinit(void)
   APP_LOG(APP_LOG_LEVEL_DEBUG, "deinit started");
 
   tick_timer_service_unsubscribe();
+  bluetooth_connection_service_unsubscribe();
 
   window_destroy(window);
 

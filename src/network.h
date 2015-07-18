@@ -68,3 +68,4 @@ typedef struct {
 void init_network(WeatherData *weather_data);
 void close_network();
 void request_weather(WeatherData *weather_data);
+void handle_bt(bool connected);

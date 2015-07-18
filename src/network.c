@@ -8,6 +8,8 @@
 
 const  int MAX_RETRY = 2;
 static int retry_count = 0;
+static char locale_msg[200];  
+
 
 static void appmsg_in_received(DictionaryIterator *received, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "In received.");
@@ -250,4 +252,20 @@ void request_weather(WeatherData *weather_data)
   dict_write_end(iter);
 
   app_message_outbox_send();
+}
+
+void handle_bt(bool connected){
+  
+
+  //If the watch has disconnected
+	if(connected == 0){
+    text_layer_set_text(location_layer, "Bluetooth lost");
+    vibes_long_pulse();
+  }
+  
+  if(connected == 1){
+    text_layer_set_text(location_layer, "Bluetooth found");
+    vibes_short_pulse();
+  }
+
 }

@@ -4,7 +4,7 @@
 #include "debug_layer.h"
 
 static Layer *weather_layer;
-static TextLayer *location_layer;
+TextLayer *location_layer;
 
 // Buffer the day / night time switch around sunrise & sunset
 const int CIVIL_TWILIGHT_BUFFER = 900; // 15 minutes
@@ -363,8 +363,13 @@ void weather_layer_update(WeatherData *weather_data)
       // reset localtime, critical as localtime modifies a shared object!
       time_t currentTime = time(NULL);
       localtime(&currentTime);
-
-      text_layer_set_text(location_layer, locale_msg);
+      
+      if (bluetooth_connection_service_peek()){
+        text_layer_set_text(location_layer, locale_msg);
+      }
+      else {
+        text_layer_set_text(location_layer, "Bluetooth lost");
+      }
     }
   }
 }

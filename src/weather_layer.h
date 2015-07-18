@@ -3,6 +3,8 @@
 
 #ifndef W_LAYER_H
 #define W_LAYER_H
+  
+  TextLayer *location_layer;
 
 typedef struct {
 	Layer *loading_layer;
