@@ -72,6 +72,8 @@ typedef enum {
 	AREA_HOURLY2
 } WeatherDisplayArea;
 
+void handle_tap(AccelAxisType axis, int32_t direction);
+  
 void location_layer_create(GRect frame, Window *window);
 void location_layer_update(WeatherData *weather_data);
 void location_layer_destroy();

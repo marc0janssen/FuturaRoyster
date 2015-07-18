@@ -117,6 +117,8 @@ static void init(void)
   
   // Subscribe to bluetooth
   bluetooth_connection_service_subscribe(&handle_bt);
+  
+  accel_tap_service_subscribe(&handle_tap);
 }
 
 static void deinit(void) 
@@ -125,6 +127,7 @@ static void deinit(void)
 
   tick_timer_service_unsubscribe();
   bluetooth_connection_service_unsubscribe();
+  accel_tap_service_unsubscribe();
 
   window_destroy(window);
 
